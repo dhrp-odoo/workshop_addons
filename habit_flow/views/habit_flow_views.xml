@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="habit_flow_action" model="ir.actions.client">
+        <field name="name">HabitFlow</field>
+        <field name="path">habit-flow</field>
+        <field name="tag">habit_flow.HabitFlowAction</field>
+    </record>
+
+    <menuitem
+        id="habit_flow_menu"
+        name="HabitFlow"
+        action="habit_flow_action"
+        sequence="10"
+    />
+</odoo>
