@@ -1,0 +1,10 @@
+<templates>
+
+    <t t-name="owl_todo.TodoInput">
+        <form class="d-flex gap-2 p-3" t-on-submit.prevent="this.onSubmit">
+            <input class="form-control" placeholder="Add new todo" t-model="this.title"/>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </t>
+
+</templates>

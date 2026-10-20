@@ -1,10 +1,11 @@
 import { Component, proxy } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { ControlPanel } from "@web/search/control_panel/control_panel";
+import { TodoInput } from "../todo_input/todo_input";
 
 export class TodoApp extends Component {
     static template = "owl_todo.TodoApp";
-    static components = { ControlPanel };
+    static components = { ControlPanel, TodoInput };
 
     // each todo: { id, title, done }
     todos = proxy([]);
