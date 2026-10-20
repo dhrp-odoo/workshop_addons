@@ -2,6 +2,7 @@
 
     <t t-name="owl_todo.TodoApp">
         <div>
+            <ControlPanel/>
             <h1>Hello OWL 3!</h1>
             <p>Welcome to the Todo workshop.</p>
         </div>
