@@ -3,7 +3,16 @@
     <t t-name="owl_todo.TodoApp">
         <div>
             <ControlPanel/>
-            <TodoInput onAdd.bind="this.addTodo"/>
+            <TodoInput
+                editingTodo="this.editingTodo()"
+                onAdd.bind="this.addTodo"
+                onSave.bind="this.editTodo"
+                onCancel.bind="this.stopEdit"/>
+            <TodoList
+                todos="this.todos"
+                onToggle.bind="this.toggleTodo"
+                onEdit.bind="this.startEdit"
+                onDelete.bind="this.deleteTodo"/>
         </div>
     </t>
 
