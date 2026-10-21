@@ -1,4 +1,4 @@
-import { Component, proxy, signal, useEffect } from "@odoo/owl";
+import { Component, computed, proxy, signal, useEffect } from "@odoo/owl";
 import { browser } from "@web/core/browser/browser";
 import { registry } from "@web/core/registry";
 import { ControlPanel } from "@web/search/control_panel/control_panel";
@@ -15,6 +15,8 @@ export class TodoApp extends Component {
     todos = proxy(JSON.parse(browser.localStorage.getItem(STORAGE_KEY) || "[]"));
     // the todo whose title is in the input, undefined when adding a new one
     editingTodo = signal(undefined);
+    // recomputed only when a todo is added, removed or toggled
+    doneCount = computed(() => this.todos.filter((todo) => todo.done).length);
 
     setup() {
         // reads every todo, so it saves again each time one of them changes

@@ -2,7 +2,13 @@
 
     <t t-name="owl_todo.TodoApp">
         <div>
-            <ControlPanel/>
+            <ControlPanel>
+                <t t-set-slot="control-panel-navigation-additional">
+                    <span t-if="this.todos.length" class="badge text-bg-primary fs-6">
+                        <t t-out="this.doneCount()"/>/<t t-out="this.todos.length"/> completed
+                    </span>
+                </t>
+            </ControlPanel>
             <TodoInput
                 editingTodo="this.editingTodo()"
                 onAdd.bind="this.addTodo"
