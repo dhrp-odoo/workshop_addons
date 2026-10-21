@@ -2,20 +2,20 @@
 
     <t t-name="owl_todo.TodoList">
         <ul class="list-group px-3">
-            <li t-foreach="this.props.todos" t-as="todo" t-key="todo.id"
+            <li t-foreach="this.todoPlugin.todos" t-as="todo" t-key="todo.id"
                 class="list-group-item d-flex align-items-center gap-2">
                 <input type="checkbox" class="form-check-input"
                     t-att-checked="todo.done"
-                    t-on-change="() => this.props.onToggle(todo.id)"/>
+                    t-on-change="() => this.todoPlugin.toggleTodo(todo.id)"/>
                 <span class="flex-grow-1"
                     t-att-class="{ 'text-decoration-line-through text-muted': todo.done }"
                     t-out="todo.title"/>
                 <button class="btn btn-sm btn-outline-primary" title="Edit"
-                    t-on-click="() => this.props.onEdit(todo.id)">
+                    t-on-click="() => this.todoPlugin.startEdit(todo.id)">
                     <i class="oi" data-icon="edit"/>
                 </button>
                 <button class="btn btn-sm btn-outline-danger" title="Delete"
-                    t-on-click="() => this.props.onDelete(todo.id)">
+                    t-on-click="() => this.todoPlugin.deleteTodo(todo.id)">
                     <i class="oi" data-icon="delete"/>
                 </button>
             </li>

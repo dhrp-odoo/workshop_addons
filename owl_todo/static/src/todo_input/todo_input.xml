@@ -3,9 +3,9 @@
     <t t-name="owl_todo.TodoInput">
         <form class="d-flex gap-2 p-3" t-on-submit.prevent="this.onSubmit">
             <input class="form-control" placeholder="Add new todo" t-model="this.title" t-ref="this.inputRef"/>
-            <t t-if="this.props.editingTodo">
+            <t t-if="this.todoPlugin.editingTodo()">
                 <button type="submit" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-secondary" t-on-click="this.props.onCancel">Cancel</button>
+                <button type="button" class="btn btn-secondary" t-on-click="() => this.todoPlugin.stopEdit()">Cancel</button>
             </t>
             <button t-else="" type="submit" class="btn btn-primary">Add</button>
         </form>

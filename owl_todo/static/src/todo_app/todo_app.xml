@@ -4,21 +4,13 @@
         <div>
             <ControlPanel>
                 <t t-set-slot="control-panel-navigation-additional">
-                    <span t-if="this.todos.length" class="badge text-bg-primary fs-6">
-                        <t t-out="this.doneCount()"/>/<t t-out="this.todos.length"/> completed
+                    <span t-if="this.todoPlugin.todos.length" class="badge text-bg-primary fs-6">
+                        <t t-out="this.todoPlugin.doneCount()"/>/<t t-out="this.todoPlugin.todos.length"/> completed
                     </span>
                 </t>
             </ControlPanel>
-            <TodoInput
-                editingTodo="this.editingTodo()"
-                onAdd.bind="this.addTodo"
-                onSave.bind="this.editTodo"
-                onCancel.bind="this.stopEdit"/>
-            <TodoList
-                todos="this.todos"
-                onToggle.bind="this.toggleTodo"
-                onEdit.bind="this.startEdit"
-                onDelete.bind="this.deleteTodo"/>
+            <TodoInput/>
+            <TodoList/>
         </div>
     </t>
 

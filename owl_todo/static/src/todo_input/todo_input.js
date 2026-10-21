@@ -1,14 +1,10 @@
-import { Component, onMounted, signal, t, useOnChange, useProps } from "@odoo/owl";
+import { Component, onMounted, signal, useOnChange, usePlugin } from "@odoo/owl";
+import { TodoPlugin } from "../todo_plugin/todo_plugin";
 
 export class TodoInput extends Component {
     static template = "owl_todo.TodoInput";
 
-    props = useProps({
-        editingTodo: t.object().optional(),
-        onAdd: t.function(),
-        onSave: t.function(),
-        onCancel: t.function(),
-    });
+    todoPlugin = usePlugin(TodoPlugin);
     title = signal("");
     inputRef = signal.ref();
 
@@ -17,7 +13,7 @@ export class TodoInput extends Component {
 
         // fill the input with the title of the todo to edit, or empty it
         useOnChange(
-            () => [this.props.editingTodo],
+            () => [this.todoPlugin.editingTodo()],
             (editingTodo) => this.title.set(editingTodo?.title ?? "")
         );
     }
@@ -25,10 +21,11 @@ export class TodoInput extends Component {
     onSubmit() {
         const title = this.title().trim();
         if (title) {
-            if (this.props.editingTodo) {
-                this.props.onSave(this.props.editingTodo.id, title);
+            const editingTodo = this.todoPlugin.editingTodo();
+            if (editingTodo) {
+                this.todoPlugin.editTodo(editingTodo.id, title);
             } else {
-                this.props.onAdd(title);
+                this.todoPlugin.addTodo(title);
             }
             this.title.set("");
         }
