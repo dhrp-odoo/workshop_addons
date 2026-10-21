@@ -1,17 +1,27 @@
-import { Component, proxy, signal } from "@odoo/owl";
+import { Component, proxy, signal, useEffect } from "@odoo/owl";
+import { browser } from "@web/core/browser/browser";
 import { registry } from "@web/core/registry";
 import { ControlPanel } from "@web/search/control_panel/control_panel";
 import { TodoInput } from "../todo_input/todo_input";
 import { TodoList } from "../todo_list/todo_list";
+
+const STORAGE_KEY = "owl_todo.todos";
 
 export class TodoApp extends Component {
     static template = "owl_todo.TodoApp";
     static components = { ControlPanel, TodoInput, TodoList };
 
     // each todo: { id, title, done }
-    todos = proxy([]);
+    todos = proxy(JSON.parse(browser.localStorage.getItem(STORAGE_KEY) || "[]"));
     // the todo whose title is in the input, undefined when adding a new one
     editingTodo = signal(undefined);
+
+    setup() {
+        // reads every todo, so it saves again each time one of them changes
+        useEffect(() => {
+            browser.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.todos));
+        });
+    }
 
     addTodo(title) {
         this.todos.push({ id: crypto.randomUUID(), title, done: false });
